@@ -18,6 +18,8 @@
 
   define('FPS_FILE', trailingslashit(ABSPATH . PLUGINDIR) . 'FP-Scraper-master/wp-fp-scrape.php');
   include_once trailingslashit(ABSPATH . PLUGINDIR).'FP-Scraper-master/panel/support.php';
+  include_once trailingslashit(ABSPATH . PLUGINDIR).'FP-Scraper-master/lib/wp-fp-scrape-cls.php';
+  
 
   function fps_install(){
       $fps_install = new wp-fp-scrape;
