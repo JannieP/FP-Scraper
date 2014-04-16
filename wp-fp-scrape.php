@@ -16,8 +16,8 @@
          define('PLUGINDIR', 'wp-content/plugins');
    }
 
-   define('FPS_FILE', trailingslashit(ABSPATH . PLUGINDIR) . 'wp-fp-scrape/wp-fp-scrape.php');
-   //include_once trailingslashit(ABSPATH . PLUGINDIR).'wp-barbarian/lib/wpb0.php';
+  define('FPS_FILE', trailingslashit(ABSPATH . PLUGINDIR) . 'wp-fp-scrape/wp-fp-scrape.php');
+  include_once trailingslashit(ABSPATH . PLUGINDIR).'wp-fp-scrape/panel/support.php';
 
   function fps_install(){
       $fps_install = new wp-fp-scrape;
