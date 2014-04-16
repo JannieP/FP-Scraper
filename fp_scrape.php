@@ -58,12 +58,12 @@ class FPListingScrape {
             //if($attribute->name=='class' && $attribute->value=='itembox ml15 mb20'){
             
                $this->items[] = array(
-										'url' => $element->getElementsByTagName('a')->item(0)->getAttribute('href'),
-										'title1' => $element->getElementsByTagName('a')->item(1)->getElementsByTagName('img')->item(0)->getAttribute('alt'),
-										'title2' => $element->getElementsByTagName('a')->item(1)->getAttribute('title'),
-										'title3' => $element->getElementsByTagName('a')->item(1)->nodeValue,
-										'price' => $item->getElementsByTagName('span')->nodeValue
-									);
+			'url' => $element->getElementsByTagName('a')->item(0)->getAttribute('href'),
+			'title1' => $element->getElementsByTagName('a')->item(1)->getElementsByTagName('img')->item(0)->getAttribute('alt'),
+			'title2' => $element->getElementsByTagName('a')->item(1)->getAttribute('title'),
+			'title3' => $element->getElementsByTagName('a')->item(1)->nodeValue,
+			'price' => $item->getElementsByTagName('span')->nodeValue
+		);
                
                //echo 'Testing123';
             
