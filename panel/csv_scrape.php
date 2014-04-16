@@ -14,7 +14,33 @@ function csvScrapeContent(){
 
  global $fps;
  
- 
+ print('
+          <div id="fps_config" class="postbox if-js-closed" >
+            
+            <h3 class=\'hndle\'>
+              <span>
+                ' . __('FPS Scraper to CSV', 'wp-fp-scrape') . '<br>
+                <span style="font-size: xx-small">(' . __('This is where the fun starts.', 'wp-fp-scrape') . ')</span>
+              </span>
+            </h3>
+            
+            <div class="inside">
+              
+              <h4>' . __('Focalprice Listing:', 'wp-fp-scrape') . '</h4>
+              
+              <div class="table">
+                <table class="widefat">
+                  <tbody>
+                    <tr>
+                      <td width="30%"><label for="fps_path">Path:</label></td>
+                      <td width="30%"><select id="fps_path" name="fps_path">' . esc_attr($fps->csv_path) . '</td>
+                      <td><span style="font-size: xx-small">The path, excluding the domain (e.g.: /hats/abc0389376.html)</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      ');
  
  
 }
@@ -29,7 +55,8 @@ function csvScrapeContent(){
             'message', 
             'keep_logs', 
             'simulate', 
-            'db' 
+            'db',
+            'csv_path'
           );
           
           $this->install_date = '';
@@ -41,6 +68,7 @@ function csvScrapeContent(){
           $this->simulate = '0';
 
           $this->db = '0';
+          $this->csv_path = '';
 
           $this->version = TB_VERSION;
 
