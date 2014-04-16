@@ -1,4 +1,4 @@
-fp_scrape
+FP-Scraper
 =========
 
 FocalPrice Scraper
