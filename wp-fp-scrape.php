@@ -1,6 +1,6 @@
 <?php
   /*
-   Plugin Name: WP Focal Price Scraper
+   Plugin Name: WP FocalPrice Scraper
    Plugin URI: http://c0nan.net
    Description: A wordpress pluggin that will scrape focalprice listings and supply the result
    Version: 1.0
@@ -42,7 +42,7 @@
   function fps_menu_items(){
       if (current_user_can('manage_options')) {
           add_menu_page('WP FocalPrice Scraper', 'WP FocalPrice Scraper', 10, 'wp-fp-scrape', 'fps_options_form');
-          add_submenu_page('wp-fp-scrape','Options','Options', 10, 'wp-fp-scrape', 'fps_options_form');
+          add_submenu_page('wp-fp-scrape','WP FPS Options','WP FPS Options', 10, 'wp-fp-scrape', 'fps_options_form');
           add_submenu_page('wp-fp-scrape', 'WP FPS Level1','WP FPS Level1', 10, 'wp-fps1', 'fps_l1_form');
           add_submenu_page('wp-fp-scrape', 'WP FPS Support','WP FPS Support', 10, 'wp-support', 'fps_support');
           add_submenu_page('wp-fp-scrape', 'WP FPS Logs','WP FPS Logs', 10, 'wp-logs', 'fps_logs');
@@ -145,18 +145,18 @@
   add_action('init', 'fps_request_handler', 10);
  
   function fps_options_form(){
-      fps_formhandler(0);
+      //fps_formhandler(0);
   }
   
   function fps_l1_form(){
-      fps_formhandler(1);
+      fps_formhandler("csvScrapeFormTitle","csvScrapeContent");
   }
 
   function fps_logs(){
       logContent();      
   }
   
-  function fps_formhandler($handler = 0){
+  function fps_formhandler($formTitleHandler = '', $formContentHandler = ''){
       
       global $fps;
       
@@ -172,7 +172,7 @@
       
       if (1 == 1){   //TODO - Kill this
 
-        $titleFnc = 'formTitle'.$handler;
+        $titleFnc = $formTitleHandler;
         call_user_func($titleFnc);
 
       ?>
@@ -206,7 +206,7 @@
                     <div id="side-sortables" class="meta-box-sortables ui-sortable">
       ');
 
-      $contentFnc = 'formContent'.$handler;
+      $contentFnc = $formContentHandler;
       call_user_func($contentFnc);
 
       print('
@@ -231,8 +231,8 @@
              <div id="side-sortables" class="meta-box-sortables ui-sortable">
       ');
 
-      testContent();
-      supportContent();
+      //testContent();
+      //supportContent();
 
       print('
              </div>
@@ -241,7 +241,7 @@
        </div>
       ');
       }
-      siteContent();
+      //siteContent();
       do_action('fps_options_form');
 
    }
@@ -304,5 +304,39 @@
    function tb_support(){
       addSupportPanel();
    }
+   
+   function logContent(){
+         global $tb;
+         print('
+         <div id="dashboard-widgets-wrap">
+            <div id="dashboard-widgets" class="metabox-holder">
+            <div id="postbox-container" style="width:75%; float:left;">
+               <div id="side-sortables" class="meta-box-sortables ui-sortable">
+                  <div id="tblog1" class="postbox if-js-closed" >
+                  <h3 class=\'hndle\'>
+                     <span>
+                        Logs <span style="font-size: xx-small">(Just so you san see what happening.)</span>
+                     </span>
+                  </h3>
+                  <div class="inside">
+                     <div class="table">
+                        <table class="widefat">
+                        <thead>
+                           <tr><th>LOG</th></tr>
+                        </thead>
+                        <tbody>
+                           <tr><td>' . $tb->message . '</td></tr>
+                           <tr><td><form id="tb_log1" name="tb_log1" action="' . admin_url('options-general.php') . '?tb_action=tb_reset_log" method="post"><p class="submit"><input type="submit" name="submit" value="' . __('Clear Logs', 'wp-barbarian') . '" /></p></form></td></tr>
+                        </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  </div>
+               </div>
+            </div>
+            </div>
+         </div>
+         ');
+      }
 
 ?>
