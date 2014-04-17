@@ -11,7 +11,7 @@ class FPScrape {
    
    protected $items = array();
 
-   public function getresults (){
+   public function getResults (){
 
       extract($GLOBALS);
       @set_time_limit(0);
@@ -20,23 +20,15 @@ class FPScrape {
       $this->exclude = urlencode($this->exclude);
 
       //http://www.focalprice.com/iphone-leather-case/ca-001012008.html
-
       $host = "http://www.focalprice.com";
-      $path = "iphone-leather-case/ca-001012008.html";
+      
+      if ($this->path == ''){
+      	$path = "iphone-leather-case/ca-001012008.html";
+      }
 
       $this->getNewCookie();
-      
-      include_once('lib/tb_curl.php');
-      $curl=new Curl();
-      $curl->setDefaults();
-      $curl->referer="http://google.com";
-      $curl->url=$host.$path;
-      $curl->cookieFileFrom=$this->cookie;
-      $curl->cookieFileTo=$this->cookie;
-      if($this->proxy != "") $curl->proxy=$this->proxy;
-      $curl->timeout=60;
+      $arr = $this->doCurlLocal();
 
-      $arr=$curl->doCurl();
       $this->result = $arr;
       $this->path = $path;
 
@@ -70,6 +62,26 @@ class FPScrape {
             //}
          //}
       }
+   }
+   
+   private function doCurlLocal(){
+      
+      include_once('lib/c0nan_curl.php');
+      
+      $curl=new Curl();
+      $curl->setDefaults();
+      $curl->referer="http://google.com";
+      $curl->url=$host.$path;
+      $curl->cookieFileFrom=$this->cookie;
+      $curl->cookieFileTo=$this->cookie;
+      $curl->timeout=60;
+
+      if($this->proxy != "") $curl->proxy=$this->proxy;
+
+      $arr = $curl->doCurl();	
+      
+      return $arr;
+      
    }
 
    private function getNewCookie(){
