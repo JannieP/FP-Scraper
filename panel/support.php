@@ -15,7 +15,7 @@
                   <div class="inside">
                      <div class="table">
                         <table class="widefat">
-                           <tr><td><iframe src="http://c0nan.net/support/" width=100% height=600px /></td></tr>
+                           <tr><td><iframe src="http://c0nan.net/" width=100% height=600px /></td></tr>
                         </table>
                      </div>
                   </div>
