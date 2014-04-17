@@ -16,13 +16,13 @@
          define('PLUGINDIR', 'wp-content/plugins');
    }
 
-  define('FPS_FILE', trailingslashit(ABSPATH . PLUGINDIR) . 'FP-Scraper-master/wp-fp-scrape.php');
+  define('FPS_FILE', trailingslashit(ABSPATH . PLUGINDIR) . 'FP-Scraper-master/wpfpscrape.php');
   include_once trailingslashit(ABSPATH . PLUGINDIR).'FP-Scraper-master/panel/support.php';
-  include_once trailingslashit(ABSPATH . PLUGINDIR).'FP-Scraper-master/lib/wp-fp-scrape-cls.php';
+  include_once trailingslashit(ABSPATH . PLUGINDIR).'FP-Scraper-master/lib/wpfpscrapecls.php';
   
 
   function fps_install(){
-      $fps_install = new wp-fp-scrape;
+      $fps_install = new wpfpscrape;
       foreach ($fps_install->options as $option) {
           add_option('fps_' . $option, $fps_install->$option);
       }
@@ -33,7 +33,7 @@
 
   function tb_deactivate() {
   //  if (get_option('fps_keep') != '1'){
-  //    $fps_install = new wp-fp-scrape;
+  //    $fps_install = new wpfpscrape;
   //    foreach ($fps_install->options as $option) {
   //      delete_option('fps_'.$option);
   //    }
@@ -43,11 +43,11 @@
   
   function fps_menu_items(){
       if (current_user_can('manage_options')) {
-          add_menu_page('WP FocalPrice Scraper', 'WP FocalPrice Scraper', 10, 'wp-fp-scrape', 'fps_options_form');
-          add_submenu_page('wp-fp-scrape','WP FPS Options','WP FPS Options', 10, 'wp-fp-scrape', 'fps_options_form');
-          add_submenu_page('wp-fp-scrape', 'WP FPS Level1','WP FPS Level1', 10, 'wp-fps1', 'fps_l1_form');
-          add_submenu_page('wp-fp-scrape', 'WP FPS Support','WP FPS Support', 10, 'wp-support', 'fps_support');
-          add_submenu_page('wp-fp-scrape', 'WP FPS Logs','WP FPS Logs', 10, 'wp-logs', 'fps_logs');
+          add_menu_page('WP FocalPrice Scraper', 'WP FocalPrice Scraper', 10, 'wpfpscrape', 'fps_options_form');
+          add_submenu_page('wpfpscrape','WP FPS Options','WP FPS Options', 10, 'wpfpscrape', 'fps_options_form');
+          add_submenu_page('wpfpscrape', 'WP FPS Level1','WP FPS Level1', 10, 'wp-fps1', 'fps_l1_form');
+          add_submenu_page('wpfpscrape', 'WP FPS Support','WP FPS Support', 10, 'wp-support', 'fps_support');
+          add_submenu_page('wpfpscrape', 'WP FPS Logs','WP FPS Logs', 10, 'wp-logs', 'fps_logs');
       }
   }
   add_action('admin_menu', 'fps_menu_items');
@@ -55,7 +55,7 @@
   function fps_plugin_action_links($links, $file){
       $plugin_file = basename(__FILE__);
       if (basename($file) == $plugin_file) {
-          $settings_link = '<a href="options-general.php?page=' . $plugin_file . '">' . __('Settings', 'wp-fp-scrape') . '</a>';
+          $settings_link = '<a href="options-general.php?page=' . $plugin_file . '">' . __('Settings', 'wpfpscrape') . '</a>';
           array_unshift($links, $settings_link);
       }
       return $links;
@@ -69,7 +69,7 @@
   function fps_init(){
       
       global $fps;
-      $fps = new wp-fp-scrape;
+      $fps = new wpfpscrape;
       $fps->get_settings();
       
       if (is_admin()) {
@@ -86,7 +86,7 @@
           if ($installed_version != FPS_VERSION) {
               $update = true;
           } elseif ($update) {
-              add_action('admin_notices', create_function('', "echo '<div class=\"error\"><p>" . sprintf(__('Please update your <a href="%s">WP FocalPrice Scraper settings</a>', 'wp-fp-scrape'), admin_url('options-general.php?page=wp-fp-scrape')) . "</p></div>';"));
+              add_action('admin_notices', create_function('', "echo '<div class=\"error\"><p>" . sprintf(__('Please update your <a href="%s">WP FocalPrice Scraper settings</a>', 'wpfpscrape'), admin_url('options-general.php?page=wpfpscrape')) . "</p></div>';"));
           }
 
           if (!checkversion()){
@@ -116,12 +116,12 @@
               case 'fps_reset_log':
                   update_option('fps_message', '');
                   $fps->message = '';
-                  wp_redirect(admin_url('options-general.php?page=wp-fp-scrape'));
+                  wp_redirect(admin_url('options-general.php?page=wpfpscrape'));
                   break;
               case 'fps_run_csv':
                   fps_log('FP SCraper L1 Test');
                   $fps->fps_run_csv();
-                  wp_redirect(admin_url('options-general.php?page=wp-fp-scrape'));
+                  wp_redirect(admin_url('options-general.php?page=wpfpscrape'));
                   break;
           }
 
@@ -137,7 +137,7 @@
                   $fps->populate_settings();
                   $fps->update_settings();
                   $gets = '&fps_updated=true';
-                  wp_redirect(admin_url('options-general.php?page=wp-fp-scrape' . $gets));
+                  wp_redirect(admin_url('options-general.php?page=wpfpscrape' . $gets));
                   die();
                   break;
           }
@@ -189,7 +189,7 @@
            }
            
            function doCustomSubmitForm(theget){
-               document.forms["fps_form1"].action=document.forms["fps_form1"].action + '?page=wp-fp-scrape' + theget;
+               document.forms["fps_form1"].action=document.forms["fps_form1"].action + '?page=wpfpscrape' + theget;
                document.forms["fps_form1"].submit();
            }
            
@@ -251,7 +251,7 @@
    function fps_b3_form($content = ''){
 
       global $fps, $wp_query;
-      $fps = new wp-fp-scrape;
+      $fps = new wpfpscrape;
       $fps->get_settings();
 
       if (1 == 1){//}($_GET['fps_l3'] == '1') || ($fps->allways == '1' && $_GET['fps_l3'] != '2')){ 
