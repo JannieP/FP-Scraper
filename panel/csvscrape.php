@@ -19,14 +19,14 @@ function csvScrapeContent(){
             
             <h3 class=\'hndle\'>
               <span>
-                ' . __('FPS Scraper to CSV', 'wp-fp-scrape') . '<br>
-                <span style="font-size: xx-small">(' . __('This is where the fun starts.', 'wp-fp-scrape') . ')</span>
+                ' . __('FPS Scraper to CSV', 'wpfpscrape') . '<br>
+                <span style="font-size: xx-small">(' . __('This is where the fun starts.', 'wpfpscrape') . ')</span>
               </span>
             </h3>
             
             <div class="inside">
               
-              <h4>' . __('Focalprice Listing:', 'wp-fp-scrape') . '</h4>
+              <h4>' . __('Focalprice Listing:', 'wpfpscrape') . '</h4>
               
               <div class="table">
                 <table class="widefat">
