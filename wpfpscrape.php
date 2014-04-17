@@ -19,6 +19,7 @@
   define('FPS_FILE', trailingslashit(ABSPATH . PLUGINDIR) . 'FP-Scraper-master/wpfpscrape.php');
   include_once trailingslashit(ABSPATH . PLUGINDIR).'FP-Scraper-master/panel/support.php';
   include_once trailingslashit(ABSPATH . PLUGINDIR).'FP-Scraper-master/lib/wpfpscrapecls.php';
+  include_once trailingslashit(ABSPATH . PLUGINDIR).'FP-Scraper-master/panel/csvscrape.php';
   
 
   function fps_install(){
@@ -45,8 +46,7 @@
       if (current_user_can('manage_options')) {
           add_menu_page('WP FocalPrice Scraper', 'WP FocalPrice Scraper', 10, 'wpfpscrape', 'fps_options_form');
           add_submenu_page('wpfpscrape','WP FPS Options','WP FPS Options', 10, 'wpfpscrape', 'fps_options_form');
-          add_submenu_page('wpfpscrape', 'WP FPS Level1','WP FPS Level1', 10, 'wp-fps1', 'fps_l1_form');
-          add_submenu_page('wpfpscrape', 'WP FPS Support','WP FPS Support', 10, 'wp-support', 'fps_support');
+          add_submenu_page('wpfpscrape', 'WP FPS Csv','WP FPS Csv', 10, 'wp-csv', 'fps_csv_form');
           add_submenu_page('wpfpscrape', 'WP FPS Logs','WP FPS Logs', 10, 'wp-logs', 'fps_logs');
       }
   }
@@ -150,7 +150,7 @@
       //fps_formhandler(0);
   }
   
-  function fps_l1_form(){
+  function fps_csv_form(){
       fps_formhandler("csvScrapeFormTitle","csvScrapeContent");
   }
 
