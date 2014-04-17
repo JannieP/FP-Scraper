@@ -33,7 +33,7 @@ function csvScrapeContent(){
                   <tbody>
                     <tr>
                       <td width="30%"><label for="fps_path">Path:</label></td>
-                      <td width="30%"><select id="fps_path" name="fps_path">' . esc_attr($fps->csv_path) . '</td>
+                      <td width="30%"><input type="text" size="25" id="fps_path" name="fps_path">' . esc_attr($fps->csv_path) . '</td>
                       <td><span style="font-size: xx-small">The path, excluding the domain (e.g.: /hats/abc0389376.html)</span></td></tr>
                   </tbody>
                 </table>
