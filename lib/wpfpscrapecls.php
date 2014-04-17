@@ -1,8 +1,8 @@
 <?php 
 
-class wp-fp-scrape  {
+class wpfpscrape  {
 
-      function wp-fp-scrape(){
+      function wpfpscrape(){
       
           $this->options = array(
             'install_date', 
